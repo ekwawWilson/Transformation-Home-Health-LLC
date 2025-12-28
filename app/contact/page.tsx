@@ -78,7 +78,7 @@ export default function ContactPage() {
             Get in Touch
           </h1>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Have questions? We're here to help. Send us a message and we'll respond as soon as possible.
+            Have questions? We&apos;re here to help. Send us a message and we&apos;ll respond as soon as possible.
           </p>
         </motion.div>
 
@@ -242,7 +242,7 @@ export default function ContactPage() {
           <h3 className="text-2xl font-bold text-gray-900 mb-4">Serving Our Community</h3>
           <p className="text-gray-600 max-w-3xl mx-auto">
             Transformation Home Health LLC is proud to serve families throughout the region with compassionate,
-            professional home care and community-based support services. We're committed to improving the quality
+            professional home care and community-based support services. We&apos;re committed to improving the quality
             of life for those we serve.
           </p>
         </motion.div>

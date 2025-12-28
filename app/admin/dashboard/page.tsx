@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { Calendar, Briefcase, MessageSquare, TrendingUp, Clock, CheckCircle } from 'lucide-react';
@@ -32,17 +32,7 @@ export default function AdminDashboardPage() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState('');
 
-  useEffect(() => {
-    const token = localStorage.getItem('adminToken');
-    if (!token) {
-      router.push('/admin/login');
-      return;
-    }
-
-    fetchStats(token);
-  }, [router]);
-
-  const fetchStats = async (token: string) => {
+  const fetchStats = useCallback(async (token: string) => {
     try {
       const response = await fetch('/api/admin/overview', {
         headers: {
@@ -89,7 +79,17 @@ export default function AdminDashboardPage() {
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [router]);
+
+  useEffect(() => {
+    const token = localStorage.getItem('adminToken');
+    if (!token) {
+      router.push('/admin/login');
+      return;
+    }
+
+    fetchStats(token);
+  }, [router, fetchStats]);
 
   if (isLoading) {
     return (
@@ -127,7 +127,7 @@ export default function AdminDashboardPage() {
           {/* Header */}
           <div className="mb-8">
             <h1 className="text-3xl font-bold text-gray-900 mb-2">Dashboard Overview</h1>
-            <p className="text-gray-600">Welcome back! Here's what's happening today.</p>
+            <p className="text-gray-600">Welcome back! Here&apos;s what&apos;s happening today.</p>
           </div>
 
           {/* Stats Grid */}

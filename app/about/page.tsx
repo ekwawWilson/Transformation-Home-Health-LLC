@@ -99,7 +99,7 @@ export default function AboutPage() {
               <p className="text-lg text-gray-600 leading-relaxed">
                 Our team of dedicated professionals is committed to providing personalized care that meets the
                 unique needs of each individual we serve. From seniors aging in place to individuals with
-                developmental disabilities, we're here to support life's journey with compassion and expertise.
+                developmental disabilities, we&apos;re here to support life&apos;s journey with compassion and expertise.
               </p>
             </motion.div>
 

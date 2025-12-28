@@ -139,7 +139,7 @@ export default function CareersPage() {
             Join Our Team
           </h1>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Make a difference in people's lives. Join our compassionate team of healthcare professionals.
+            Make a difference in people&apos;s lives. Join our compassionate team of healthcare professionals.
           </p>
         </motion.div>
 

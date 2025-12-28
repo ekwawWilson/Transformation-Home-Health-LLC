@@ -271,7 +271,7 @@ export default function WhoWeServePage() {
               Let Us Support You
             </h2>
             <p className="text-xl mb-8 text-primary-100">
-              Whatever your care needs, we're here to help. Schedule a consultation today.
+              Whatever your care needs, we&apos;re here to help. Schedule a consultation today.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link

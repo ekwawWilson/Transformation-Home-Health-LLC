@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { MessageSquare, Mail, Phone, Send, CheckCircle } from 'lucide-react';
@@ -26,17 +26,7 @@ export default function MessagesPage() {
   const [replyText, setReplyText] = useState('');
   const [statusFilter, setStatusFilter] = useState('ALL');
 
-  useEffect(() => {
-    const token = localStorage.getItem('adminToken');
-    if (!token) {
-      router.push('/admin/login');
-      return;
-    }
-
-    fetchMessages(token);
-  }, [router]);
-
-  const fetchMessages = async (token: string) => {
+  const fetchMessages = useCallback(async (token: string) => {
     try {
       const response = await fetch('/api/admin/messages', {
         headers: {
@@ -59,7 +49,17 @@ export default function MessagesPage() {
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [router]);
+
+  useEffect(() => {
+    const token = localStorage.getItem('adminToken');
+    if (!token) {
+      router.push('/admin/login');
+      return;
+    }
+
+    fetchMessages(token);
+  }, [router, fetchMessages]);
 
   const sendReply = async (id: number) => {
     const token = localStorage.getItem('adminToken');

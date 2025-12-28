@@ -231,7 +231,7 @@ export default function AppointmentsPage() {
           <div className="grid md:grid-cols-3 gap-6">
             <div className="card">
               <div className="text-primary-600 font-bold text-lg mb-2">Response Time</div>
-              <p className="text-gray-600">We'll contact you within 24-48 hours</p>
+              <p className="text-gray-600">We&apos;ll contact you within 24-48 hours</p>
             </div>
             <div className="card">
               <div className="text-primary-600 font-bold text-lg mb-2">Free Consultation</div>

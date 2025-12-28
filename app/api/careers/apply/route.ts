@@ -49,7 +49,7 @@ export async function POST(request: NextRequest) {
         positionApplied: data.positionApplied,
         message: data.message,
         resumePath,
-        status: 'NEW',
+        status: 'PENDING',
       },
     });
 

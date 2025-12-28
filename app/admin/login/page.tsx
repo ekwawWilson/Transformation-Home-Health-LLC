@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { Lock, Mail, AlertCircle } from 'lucide-react';
 
@@ -139,9 +140,9 @@ export default function AdminLoginPage() {
 
         {/* Back to Home */}
         <div className="text-center mt-6">
-          <a href="/" className="text-white hover:text-primary-200 text-sm transition-colors">
+          <Link href="/" className="text-white hover:text-primary-200 text-sm transition-colors">
             ← Back to Home
-          </a>
+          </Link>
         </div>
       </motion.div>
     </div>

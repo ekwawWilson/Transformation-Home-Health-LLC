@@ -111,6 +111,7 @@ export default function PictureGallery({ images }: PictureGalleryProps) {
               className="max-w-7xl max-h-[90vh] mx-auto px-4"
               onClick={(e) => e.stopPropagation()}
             >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={images[selectedImage].src}
                 alt={images[selectedImage].alt}

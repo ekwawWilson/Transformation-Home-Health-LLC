@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight, Play, Pause } from 'lucide-react';
 
@@ -22,6 +22,11 @@ export default function HeroSlider({ slides, autoPlayInterval = 5000 }: HeroSlid
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
   const [direction, setDirection] = useState(0);
 
+  const goToNext = useCallback(() => {
+    setDirection(1);
+    setCurrentIndex((prev) => (prev + 1) % slides.length);
+  }, [slides.length]);
+
   useEffect(() => {
     if (!isAutoPlaying) return;
 
@@ -30,12 +35,7 @@ export default function HeroSlider({ slides, autoPlayInterval = 5000 }: HeroSlid
     }, autoPlayInterval);
 
     return () => clearInterval(interval);
-  }, [currentIndex, isAutoPlaying, autoPlayInterval]);
-
-  const goToNext = () => {
-    setDirection(1);
-    setCurrentIndex((prev) => (prev + 1) % slides.length);
-  };
+  }, [currentIndex, isAutoPlaying, autoPlayInterval, goToNext]);
 
   const goToPrevious = () => {
     setDirection(-1);

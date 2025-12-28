@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { Briefcase, Mail, Phone, Download, CheckCircle, XCircle } from 'lucide-react';
@@ -25,17 +25,7 @@ export default function CareersPage() {
   const [isLoading, setIsLoading] = useState(true);
   const [statusFilter, setStatusFilter] = useState('ALL');
 
-  useEffect(() => {
-    const token = localStorage.getItem('adminToken');
-    if (!token) {
-      router.push('/admin/login');
-      return;
-    }
-
-    fetchApplications(token);
-  }, [router]);
-
-  const fetchApplications = async (token: string) => {
+  const fetchApplications = useCallback(async (token: string) => {
     try {
       const response = await fetch('/api/admin/careers', {
         headers: {
@@ -58,7 +48,17 @@ export default function CareersPage() {
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [router]);
+
+  useEffect(() => {
+    const token = localStorage.getItem('adminToken');
+    if (!token) {
+      router.push('/admin/login');
+      return;
+    }
+
+    fetchApplications(token);
+  }, [router, fetchApplications]);
 
   const updateStatus = async (id: number, newStatus: string) => {
     const token = localStorage.getItem('adminToken');

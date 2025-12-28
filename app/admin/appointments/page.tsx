@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { Calendar, Phone, Mail, Clock, CheckCircle, XCircle, Send } from 'lucide-react';
@@ -28,17 +28,7 @@ export default function AppointmentsPage() {
   const [replyText, setReplyText] = useState('');
   const [statusFilter, setStatusFilter] = useState('ALL');
 
-  useEffect(() => {
-    const token = localStorage.getItem('adminToken');
-    if (!token) {
-      router.push('/admin/login');
-      return;
-    }
-
-    fetchAppointments(token);
-  }, [router]);
-
-  const fetchAppointments = async (token: string) => {
+  const fetchAppointments = useCallback(async (token: string) => {
     try {
       const response = await fetch('/api/admin/appointments', {
         headers: {
@@ -61,7 +51,17 @@ export default function AppointmentsPage() {
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [router]);
+
+  useEffect(() => {
+    const token = localStorage.getItem('adminToken');
+    if (!token) {
+      router.push('/admin/login');
+      return;
+    }
+
+    fetchAppointments(token);
+  }, [router, fetchAppointments]);
 
   const updateStatus = async (id: number, newStatus: string) => {
     const token = localStorage.getItem('adminToken');
