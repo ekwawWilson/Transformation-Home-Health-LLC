@@ -100,9 +100,20 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <div className="font-semibold text-gray-900 mb-1">Phone</div>
-                    <a href="tel:5551234567" className="text-gray-600 hover:text-primary-600 transition-colors">
-                      (555) 123-4567
-                    </a>
+                    <div className="space-y-1">
+                      <div>
+                        <span className="text-sm text-gray-500">Office: </span>
+                        <a href="tel:+17206681225" className="text-gray-600 hover:text-primary-600 transition-colors">
+                          +1 (720) 668-1225
+                        </a>
+                      </div>
+                      <div>
+                        <span className="text-sm text-gray-500">Mobile: </span>
+                        <a href="tel:+12023903257" className="text-gray-600 hover:text-primary-600 transition-colors">
+                          +1 (202) 390-3257
+                        </a>
+                      </div>
+                    </div>
                   </div>
                 </div>
 

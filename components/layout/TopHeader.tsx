@@ -19,11 +19,19 @@ export default function TopHeader() {
           {/* Emergency Contact */}
           <div className="flex items-center gap-4">
             <a
-              href="tel:5559876543"
+              href="tel:+17206681225"
               className="flex items-center gap-2 hover:text-primary-200 transition-colors"
             >
               <Phone className="w-4 h-4" />
-              <span className="font-semibold">24/7 Emergency: (555) 987-6543</span>
+              <span className="font-semibold">Office: +1 (720) 668-1225</span>
+            </a>
+            <span className="hidden md:inline text-primary-300">|</span>
+            <a
+              href="tel:+12023903257"
+              className="hidden sm:flex items-center gap-2 hover:text-primary-200 transition-colors"
+            >
+              <Phone className="w-4 h-4" />
+              <span>Mobile: +1 (202) 390-3257</span>
             </a>
             <span className="hidden md:inline text-primary-300">|</span>
             <a
