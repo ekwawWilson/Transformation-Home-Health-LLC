@@ -1,0 +1,98 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+enum AdminRole {
+  SUPER_ADMIN
+  ADMIN
+}
+
+enum AppointmentStatus {
+  PENDING
+  APPROVED
+  DECLINED
+}
+
+enum ApplicationStatus {
+  NEW
+  REVIEWED
+  SHORTLISTED
+  REJECTED
+}
+
+model Admin {
+  id         Int        @id @default(autoincrement())
+  fullName   String     @map("full_name")
+  email      String     @unique
+  passwordHash String   @map("password_hash")
+  role       AdminRole  @default(ADMIN)
+  lastLogin  DateTime?  @map("last_login")
+  createdAt  DateTime   @default(now()) @map("created_at")
+  auditLogs  AuditLog[]
+
+  @@map("admins")
+}
+
+model Appointment {
+  id            Int                @id @default(autoincrement())
+  fullName      String             @map("full_name")
+  email         String
+  phone         String
+  serviceType   String             @map("service_type")
+  preferredDate DateTime           @map("preferred_date")
+  preferredTime String             @map("preferred_time")
+  message       String
+  status        AppointmentStatus  @default(PENDING)
+  adminReply    String?            @map("admin_reply")
+  repliedAt     DateTime?          @map("replied_at")
+  createdAt     DateTime           @default(now()) @map("created_at")
+  updatedAt     DateTime           @updatedAt @map("updated_at")
+
+  @@map("appointments")
+}
+
+model CareerApplication {
+  id              Int               @id @default(autoincrement())
+  fullName        String            @map("full_name")
+  email           String
+  phone           String
+  positionApplied String            @map("position_applied")
+  resumePath      String            @map("resume_path")
+  message         String?
+  status          ApplicationStatus @default(NEW)
+  createdAt       DateTime          @default(now()) @map("created_at")
+
+  @@map("career_applications")
+}
+
+model ContactMessage {
+  id         Int       @id @default(autoincrement())
+  name       String
+  email      String
+  message    String
+  adminReply String?   @map("admin_reply")
+  repliedAt  DateTime? @map("replied_at")
+  createdAt  DateTime  @default(now()) @map("created_at")
+
+  @@map("contact_messages")
+}
+
+model AuditLog {
+  id         Int      @id @default(autoincrement())
+  adminId    Int      @map("admin_id")
+  action     String
+  entityType String   @map("entity_type")
+  entityId   Int      @map("entity_id")
+  createdAt  DateTime @default(now()) @map("created_at")
+  admin      Admin    @relation(fields: [adminId], references: [id])
+
+  @@map("audit_logs")
+}
